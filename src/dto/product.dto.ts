@@ -1,5 +1,4 @@
-export interface ProductDTO {
-    name: string;
-    id: number;
-    price:  number;
+export interface CreateProductDTO {
+  name: string;
+  price: number;
 }

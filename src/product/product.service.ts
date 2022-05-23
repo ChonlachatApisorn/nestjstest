@@ -1,22 +1,31 @@
+/* eslint-disable prettier/prettier */
+import { Model } from 'mongoose';
 import { Injectable } from '@nestjs/common';
-import { ProductDTO } from 'src/dto/product.dto';
+import { InjectModel } from '@nestjs/mongoose';
+import { Product, ProductDocument } from 'src/Schemas/product.Schema';
+import { CreateProductDTO } from 'src/dto/product.dto';
 
 @Injectable()
 export class ProductService {
-private product: ProductDTO[] = [
-    {name: 'Mango', id:1, price: 250},
-    {name: 'Apple', id:2, price: 150},
-    {name: 'PineApple', id:3, price: 50},
-];
-    findAll(): ProductDTO[]{
-        return this.product;
-    }
+  constructor(@InjectModel(Product.name) private ProductModel: Model<ProductDocument>) {}
 
-    findByID(id: number){
-        return this.product.find((p) => p.id === id);
-    }
+  async create(createProductDTO: CreateProductDTO): Promise<Product> {
+    const createProduct = new this.ProductModel(createProductDTO);
+    return createProduct.save();
+  }
 
-    findByCondition(predicate: (product: ProductDTO)=>boolean){
-        return this.product.filter(p=>predicate(p))
-    }
+  async findAll(): Promise<Product[]> {
+    return this.ProductModel.find().exec();
+  }
+
+  async fineOne(id: string): Promise<Product> {
+    return this.ProductModel.findOne({ _id: id}).exec();
+  }
+
+  async delete(id: string) {
+    const deleteProduct = await this.ProductModel
+      .findByIdAndRemove({ _id: id})
+      .exec()
+    return deleteProduct;
+  }
 }
