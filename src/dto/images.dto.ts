@@ -1,3 +1,4 @@
-export interface image {
-  name: string;
+export class CreateImageDTO {
+  originalname: string;
+  filename: string;
 }

@@ -1,10 +1,10 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
 
-export type ProductDocument = Product & Document;
+export type ImageDocument = Image & Document;
 
 @Schema()
-export class Product {
+export class Image {
   @Prop()
   originalname: string;
 
@@ -12,4 +12,4 @@ export class Product {
   filename: string;
 }
 
-export const ProductSchema = SchemaFactory.createForClass(Product);
+export const ImageDocument = SchemaFactory.createForClass(Image);

@@ -4,6 +4,9 @@ import { Injectable } from '@nestjs/common';
 import { InjectModel } from '@nestjs/mongoose';
 import { Product, ProductDocument } from 'src/Schemas/product.Schema';
 import { CreateProductDTO } from 'src/dto/product.dto';
+// import { ImageDocument, Image } from 'src/Schemas/image.Schema';
+// import { CreateImageDTO } from 'src/dto/images.dto';
+
 
 @Injectable()
 export class ProductService {
@@ -29,3 +32,13 @@ export class ProductService {
     return deleteProduct;
   }
 }
+
+// @Injectable()
+// export class ImageService {
+//   constructor(@InjectModel(Image.name) private ImageModel: Model<ImageDocument>) {}
+
+//   async upload(createImageDTO: CreateImageDTO): Promise<Image> {
+//     const createImage = await this.ImageModel.create(createImageDTO);
+//     return createImage
+//   }
+// }
