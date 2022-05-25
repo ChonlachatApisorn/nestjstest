@@ -1,22 +1,15 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
-/* eslint-disable prettier/prettier */
-import { Body, Controller, Delete, Get, Param, Post, Req, Res, UploadedFile, UploadedFiles, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UseGuards } from '@nestjs/common';
 import { CreateProductDTO } from 'src/dto/product.dto';
 import * as productService from './product.service';
-import * as imageService  from './product.service';
 import { Product } from 'src/Schemas/product.Schema';
-import { FileInterceptor, FilesInterceptor } from '@nestjs/platform-express';
-import { diskStorage } from 'multer';
-import { Observable, of } from 'rxjs';
-import { v4 as uuidv4 } from 'uuid';
-import path from 'path';
-import { parse } from 'path';
-import { editFileName, imageFileFilter } from 'src/middlewares/upload.middleware';
+import { AuthGuard } from '@nestjs/passport';
 
 @Controller('product')
 export class ProductController {
   constructor(private ProductService: productService.ProductService) {}
 
+  @UseGuards(AuthGuard('jwt'))
   @Get()
   getProductAll() {
     return this.ProductService.findAll();
@@ -84,7 +77,6 @@ export class ProductController {
   // seeUploadedFile(@Param('imgpath') image, @Res() res) {
   //   return res.sendFile(image, { root: './files' });
   // }
-}
   // @Post('upload')
   // @UseInterceptors(FileInterceptor('file', {
   //   storage: diskStorage({
@@ -120,4 +112,4 @@ export class ProductController {
   // async uploadMultipleFiles(@UploadedFiles() files) {
   //   const image = await this.ImageService.upload(files)
   // }
-    
+}

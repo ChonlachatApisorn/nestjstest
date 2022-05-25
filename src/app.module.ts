@@ -2,6 +2,8 @@ import { Module } from "@nestjs/common";
 import { ProductModule } from "./modules/product.module";
 import { MongooseModule } from "@nestjs/mongoose";
 import { UploadModule } from "./modules/image.module";
+import { AuthModule } from './auth/auth.module';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
@@ -10,6 +12,8 @@ import { UploadModule } from "./modules/image.module";
     ),
     ProductModule,
     UploadModule,
+    AuthModule,
+    UserModule,
   ],
 })
 export class AppModule {}
