@@ -1,4 +1,4 @@
-export class AuthDTO {
-    username: string;
-    password: string;
+export interface AuthDTO {
+    readonly username: string;
+    readonly password: string;
 }
