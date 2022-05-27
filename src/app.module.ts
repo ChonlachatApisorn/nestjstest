@@ -4,6 +4,7 @@ import { MongooseModule } from "@nestjs/mongoose";
 import { UploadModule } from "./modules/image.module";
 import { AuthModule } from './auth/auth.module';
 import { UserModule } from './user/user.module';
+import { ConfigModule } from "@nestjs/config";
 
 @Module({
   imports: [
@@ -14,6 +15,9 @@ import { UserModule } from './user/user.module';
     UploadModule,
     AuthModule,
     UserModule,
+    ConfigModule.forRoot({
+      envFilePath: ['.env'],
+    }),
   ],
 })
 export class AppModule {}

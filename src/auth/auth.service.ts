@@ -1,9 +1,6 @@
 import {Request, Injectable, UnauthorizedException } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
-import { AuthDTO } from 'src/dto/auth.dto';
-import { UserRegisSchema } from 'src/Schemas/user.Schema';
 import { UserService } from 'src/user/user.service';
-const Users = require('../Schemas/user.Schema');
 
 @Injectable()
 export class AuthService {

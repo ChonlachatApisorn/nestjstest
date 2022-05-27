@@ -40,7 +40,6 @@ export class UserService {
     }
 
     async findByName(username: string): Promise<UserRegis> {
-        console.log(username);
         return this.UserRegisModel.findOne({ username:username }).exec()
     }
 }
