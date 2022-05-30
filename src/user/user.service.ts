@@ -12,7 +12,7 @@ export class UserService {
 
     constructor(@InjectModel(UserRegis.name) private UserRegisModel:Model<UserRegisDocument>) {}
 
-    async create(dto: AuthDTO): Promise <UserRegis> {
+    async create(dto: AuthDTO): Promise <UserRegis | string > {
         const {username, password} = dto;
     try {
 
@@ -23,15 +23,22 @@ export class UserService {
         // }
 
         // encrypt password
-        const encryptedPassword = password;
+        const encryptedPassword = bcrypt.hashSync(password, 10);
 
         // create user in database
-        const userssss = await this.UserRegisModel.create({
+        const userssss = new this.UserRegisModel({
             username,
             password: encryptedPassword
         
         })
-        return userssss;
+
+        const checkUser = await this.findByName(dto.username);
+        if (checkUser) {
+            // console.log('User have already') ;
+            return "User have already";
+        } else {
+            return userssss.save();
+        }
     } catch (err) {
         throw new ConflictException({
             message: ['Error']
