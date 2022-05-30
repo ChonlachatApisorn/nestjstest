@@ -14,7 +14,7 @@ import { LocalStrategy } from './strategy/loacl.strategy';
     PassportModule,
     JwtModule.register({
       secret: jwtConstants.secret,
-      // secretOrKey: 'secret',
+      // secret: 'super-secret',
       // secret: process.env.secret,
       signOptions: { expiresIn: '60s' },
   }),
