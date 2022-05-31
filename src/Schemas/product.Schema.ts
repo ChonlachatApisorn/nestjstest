@@ -5,11 +5,12 @@ export type ProductDocument = Product & Document;
 
 @Schema()
 export class Product {
-  @Prop()
-  originalname: string;
 
   @Prop()
-  filename: string;
+  name: string;
+
+  @Prop()
+  price: number;
 }
 
 export const ProductSchema = SchemaFactory.createForClass(Product);

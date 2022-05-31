@@ -15,13 +15,6 @@ export class UserService {
     async create(dto: AuthDTO): Promise <UserRegis | string > {
         const {username, password} = dto;
     try {
-
-        // get input data
-        // const {username, password} = dto;
-        // if (!(username && password )) {
-        //     console.log("All input is requried")
-        // }
-
         // encrypt password
         const encryptedPassword = bcrypt.hashSync(password, 10);
 
@@ -29,7 +22,6 @@ export class UserService {
         const userssss = new this.UserRegisModel({
             username,
             password: encryptedPassword
-        
         })
 
         const checkUser = await this.findByName(dto.username);
@@ -45,7 +37,7 @@ export class UserService {
         })
     }
     }
-
+    
     async findByName(username: string): Promise<UserRegis> {
         return this.UserRegisModel.findOne({ username:username }).exec()
     }

@@ -23,36 +23,9 @@ export class AuthService {
         async login(user: any) {
         const payload = { username: user._doc.username, sub: user._doc._id };
         return {
-
             access_token: this.jwtService.sign(payload, {
                 secret: jwtConstants.secret,
             }),
         };    
-
-    // async login(@Request() authDto: AuthDTO) {
-
-    //     // get user input
-    //     const { username, password } = authDto;
-    //     if (!(username && password)) {
-    //         console.log("All input is requried")
-    //     }
-
-    //     // const user = await UserRegisSchema.
-    //     const user =Users.findOne((User) => User.username === authDto.username);
-    //     if (!user) throw new UnauthorizedException('Credentials incorrect');
-    //     if (user.password !== authDto.password) 
-    //         throw new UnauthorizedException('Credentials incorrect');
-        
-    //     return this.signUser(user.id, user.username, 'user');
-    // }
-
-    // signUser(id: number, username: string, type: string) {
-    //     return this.jwtService.sign({
-    //         sub: id,
-    //         username,
-    //         type: type,
-    //     })
-    // }
-
     }
 }
